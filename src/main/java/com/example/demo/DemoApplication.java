@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -14,6 +16,7 @@ public class DemoApplication {
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(DemoApplication.class, args);
 
+		ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
 		//创建socket服务,监听10101端口
 		ServerSocket server = new ServerSocket(10101);
 		System.out.println("服务器启动！");
@@ -21,8 +24,13 @@ public class DemoApplication {
 			//获取一个套接字（阻塞）
 			final Socket socket = server.accept();
 			System.out.println("来个一个新客户端！");
-			//业务处理
-			handler(socket);
+			newCachedThreadPool.execute(new Runnable() {
+				@Override
+				public void run() {
+					//业务处理
+					handler(socket);
+				}
+			});
 		}
 	}
 
