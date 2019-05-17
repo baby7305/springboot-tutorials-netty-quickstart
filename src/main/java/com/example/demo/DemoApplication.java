@@ -32,7 +32,7 @@ public class DemoApplication {
 			public ChannelPipeline getPipeline() throws Exception {
 				ChannelPipeline channelPipeline = Channels.pipeline();
 				channelPipeline.addLast("helloHandler", new HelloHandler());
-				return null;
+				return channelPipeline;
 			}
 		});
 
