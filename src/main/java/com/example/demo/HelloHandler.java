@@ -1,14 +1,12 @@
 package com.example.demo;
 
-import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.*;
 
 public class HelloHandler extends SimpleChannelHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
 		super.messageReceived(ctx, e);
-		ChannelBuffer message = (ChannelBuffer) e.getMessage();
-		String s = new String(message.array());
+		String s = (String) e.getMessage();
 		System.out.println(s);
 	}
 
