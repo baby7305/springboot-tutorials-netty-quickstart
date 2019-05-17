@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.*;
 
 public class HelloHandler extends SimpleChannelHandler {
@@ -8,6 +10,9 @@ public class HelloHandler extends SimpleChannelHandler {
 		super.messageReceived(ctx, e);
 		String s = (String) e.getMessage();
 		System.out.println(s);
+
+		ChannelBuffer channelBuffer = ChannelBuffers.copiedBuffer("hi".getBytes());
+		ctx.getChannel().write(channelBuffer);
 	}
 
 	@Override
