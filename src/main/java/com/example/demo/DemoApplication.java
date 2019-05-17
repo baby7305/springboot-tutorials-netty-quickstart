@@ -37,6 +37,8 @@ public class DemoApplication {
 		});
 
 		serverBootstrap.bind(new InetSocketAddress(10101));
+
+		System.out.println("start!!!");
 	}
 
 }
